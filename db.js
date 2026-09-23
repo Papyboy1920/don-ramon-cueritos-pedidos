@@ -98,24 +98,34 @@ function mergeCatalog(live, seed) {
   return { catalog: base, added, filled };
 }
 
-// ---------- Correcciones puntuales de fotos (v1 → v2) ----------
+// ---------- Correcciones puntuales de fotos (v1 → v2 → v3) ----------
 // Solo se aplican si el valor actual es EXACTAMENTE el viejo de la semilla.
 // Jamás tocan lo que el dueño haya cambiado en /tienda. Idempotentes.
+// Cada item puede tener una cadena de pasos; se aplican en orden hasta estabilizar.
 const IMAGE_FIXES = {
-  "combo-1": ["cross-gris.jpg", "cuerito-entero.jpg"],
-  "combo-2": ["bandeja-1.jpg", "tray-real-1.jpg"],
-  "combo-4": ["cross-cordonbleu.jpg", "tray-real-2.jpg"],
-  "combo-5": ["cross-amarillo.jpg", "bandeja-1.jpg"]
+  "combo-1": [["cross-gris.jpg", "cuerito-entero.jpg"]],
+  "combo-2": [["bandeja-1.jpg", "tray-real-1.jpg"], ["tray-real-1.jpg", "pernil-flyer.jpg"]],
+  "combo-3": [["bandeja-2.jpg", "pollo-asado.jpg"]],
+  "combo-4": [["cross-cordonbleu.jpg", "tray-real-2.jpg"]],
+  "combo-5": [["cross-amarillo.jpg", "bandeja-1.jpg"]],
+  "cuerito-congri": [["cross-gris.jpg", "relleno-largo-1.jpg"]],
+  "cuerito-amarillo": [["cross-amarillo.jpg", "relleno-largo-2.jpg"]],
+  "cuerito-jamon-queso": [["cross-cordonbleu.jpg", "relleno-largo-3.jpg"]]
 };
 function applyImageFixes(catalog) {
-  let fixed = 0;
-  for (const d of (catalog && catalog.departments) || []) {
-    for (const c of d.categories || []) {
-      for (const it of c.items || []) {
-        const f = IMAGE_FIXES[it.id];
-        if (!f) continue;
-        for (const key of ["image", "img"]) {
-          if (it[key] === f[0]) { it[key] = f[1]; fixed++; }
+  let fixed = 0, changed = true, pass = 0;
+  while (changed && pass++ < 6) {
+    changed = false;
+    for (const d of (catalog && catalog.departments) || []) {
+      for (const c of d.categories || []) {
+        for (const it of c.items || []) {
+          const steps = IMAGE_FIXES[it.id];
+          if (!steps) continue;
+          for (const key of ["image", "img"]) {
+            for (const [oldV, newV] of steps) {
+              if (it[key] === oldV) { it[key] = newV; fixed++; changed = true; }
+            }
+          }
         }
       }
     }

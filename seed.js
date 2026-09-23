@@ -10,7 +10,7 @@
 // CATALOG_VERSION: subir para re-sembrar en el servidor.
 // ============================================================
 
-const CATALOG_VERSION = 2;
+const CATALOG_VERSION = 3;
 
 const SEED_CATALOG = {
   departments: [
@@ -26,9 +26,9 @@ const SEED_CATALOG = {
           items: [
             { id: "combo-1", name: "Combo 1 · Cuerito Relleno de Arroz Moro", price: 160.00, unit: "10 personas", active: true, tag: "⭐ El rey de la casa", image: "cuerito-entero.jpg",
               desc: "Cuerito relleno de arroz moro, bandejita de arroz moro, yuca con mojo." },
-            { id: "combo-2", name: "Combo 2 · Paleta de Puerco", price: 100.00, unit: "10 personas", active: true, image: "tray-real-1.jpg",
+            { id: "combo-2", name: "Combo 2 · Paleta de Puerco", price: 100.00, unit: "10 personas", active: true, image: "pernil-flyer.jpg",
               desc: "Paleta de puerco, arroz moro, yuca con mojo." },
-            { id: "combo-3", name: "Combo 3 · Piezas de Pollo", price: 100.00, unit: "10 personas", active: true, image: "bandeja-2.jpg",
+            { id: "combo-3", name: "Combo 3 · Piezas de Pollo", price: 100.00, unit: "10 personas", active: true, image: "pollo-asado.jpg",
               desc: "Muslo y contramuslo, arroz moro, plátano maduro." },
             { id: "combo-4", name: "Combo 4 · Cuerito de Jamón y Queso", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "tray-real-2.jpg",
               desc: "Cuerito relleno de jamón y queso, arroz moro, yuca con mojo." },
@@ -48,11 +48,11 @@ const SEED_CATALOG = {
           id: "cueritos-enteros",
           name: "Enteros",
           items: [
-            { id: "cuerito-congri", name: "Cuerito Relleno de Congrí", price: 100.00, unit: "entero", active: true, tag: "⭐ El rey de la casa", image: "cross-gris.jpg",
+            { id: "cuerito-congri", name: "Cuerito Relleno de Congrí", price: 100.00, unit: "entero", active: true, tag: "⭐ El rey de la casa", image: "relleno-largo-1.jpg",
               desc: "Cuerito entero relleno de arroz congrí. Cuero crujiente, relleno generoso. Precio sugerido — confirmar con Don Ramón." },
-            { id: "cuerito-amarillo", name: "Cuerito Relleno de Arroz Amarillo", price: 100.00, unit: "entero", active: true, tag: "Sugerido", image: "cross-amarillo.jpg",
+            { id: "cuerito-amarillo", name: "Cuerito Relleno de Arroz Amarillo", price: 100.00, unit: "entero", active: true, tag: "Sugerido", image: "relleno-largo-2.jpg",
               desc: "Cuerito entero relleno de arroz amarillo con petit pois. Precio sugerido — confirmar con Don Ramón." },
-            { id: "cuerito-jamon-queso", name: "Cuerito Relleno de Jamón y Queso", price: 120.00, unit: "entero", active: true, tag: "NUEVO", image: "cross-cordonbleu.jpg",
+            { id: "cuerito-jamon-queso", name: "Cuerito Relleno de Jamón y Queso", price: 120.00, unit: "entero", active: true, tag: "NUEVO", image: "relleno-largo-3.jpg",
               desc: "Cuerito entero relleno de jamón y queso estilo cordon bleu. Precio sugerido — confirmar con Don Ramón." }
           ]
         }
