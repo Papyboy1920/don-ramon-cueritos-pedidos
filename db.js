@@ -98,19 +98,19 @@ function mergeCatalog(live, seed) {
   return { catalog: base, added, filled };
 }
 
-// ---------- Correcciones puntuales de fotos (v1 → v2 → v3) ----------
+// ---------- Correcciones puntuales de fotos (v1 → v2 → v3 → v4) ----------
 // Solo se aplican si el valor actual es EXACTAMENTE el viejo de la semilla.
 // Jamás tocan lo que el dueño haya cambiado en /tienda. Idempotentes.
 // Cada item puede tener una cadena de pasos; se aplican en orden hasta estabilizar.
 const IMAGE_FIXES = {
   "combo-1": [["cross-gris.jpg", "cuerito-entero.jpg"]],
-  "combo-2": [["bandeja-1.jpg", "tray-real-1.jpg"], ["tray-real-1.jpg", "pernil-flyer.jpg"]],
+  "combo-2": [["bandeja-1.jpg", "tray-real-1.jpg"], ["tray-real-1.jpg", "pernil-flyer.jpg"], ["pernil-flyer.jpg", "pernil-real.jpg"]],
   "combo-3": [["bandeja-2.jpg", "pollo-asado.jpg"]],
   "combo-4": [["cross-cordonbleu.jpg", "tray-real-2.jpg"]],
   "combo-5": [["cross-amarillo.jpg", "bandeja-1.jpg"]],
-  "cuerito-congri": [["cross-gris.jpg", "relleno-largo-1.jpg"]],
-  "cuerito-amarillo": [["cross-amarillo.jpg", "relleno-largo-2.jpg"]],
-  "cuerito-jamon-queso": [["cross-cordonbleu.jpg", "relleno-largo-3.jpg"]]
+  "cuerito-congri": [["cross-gris.jpg", "relleno-largo-1.jpg"], ["relleno-largo-1.jpg", "relleno-congri.jpg"]],
+  "cuerito-amarillo": [["cross-amarillo.jpg", "relleno-largo-2.jpg"], ["relleno-largo-2.jpg", "relleno-amarillo.jpg"]],
+  "cuerito-jamon-queso": [["cross-cordonbleu.jpg", "relleno-largo-3.jpg"], ["relleno-largo-3.jpg", "relleno-cordon.jpg"]]
 };
 function applyImageFixes(catalog) {
   let fixed = 0, changed = true, pass = 0;
