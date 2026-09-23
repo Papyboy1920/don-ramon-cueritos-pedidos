@@ -31,7 +31,7 @@ const SEED_CATALOG = {
               desc: "Muslo y contramuslo, arroz moro, plátano maduro." },
             { id: "combo-4", name: "Combo 4 · Cuerito de Jamón y Queso", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "cross-cordonbleu.jpg",
               desc: "Cuerito relleno de jamón y queso, arroz moro, yuca con mojo." },
-            { id: "combo-5", name: "Combo 5 · Cuerito de Arroz Amarillo", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "combo-cuerito.jpg",
+            { id: "combo-5", name: "Combo 5 · Cuerito de Arroz Amarillo", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "cross-amarillo.jpg",
               desc: "Cuerito relleno de arroz amarillo, arroz amarillo, plátano maduro." }
           ]
         }
