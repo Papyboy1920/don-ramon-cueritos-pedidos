@@ -1,0 +1,16 @@
+# Render Blueprint — Don Ramón — El Rey de los Cueritos Rellenos
+# Despliegue con 1 clic desde el dashboard de Render (New > Blueprint).
+# Crea el servicio web + Postgres gratis.
+services:
+  - type: web
+    name: don-ramon-cueritos-pedidos
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/catalog
+    envVars:
+      - key: STORE_KEY
+        generateValue: true
+        # Render genera una clave aleatoria. Cópiala del dashboard
+        # (Environment) y pégala en /tienda para entrar.
