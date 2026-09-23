@@ -98,6 +98,31 @@ function mergeCatalog(live, seed) {
   return { catalog: base, added, filled };
 }
 
+// ---------- Correcciones puntuales de fotos (v1 → v2) ----------
+// Solo se aplican si el valor actual es EXACTAMENTE el viejo de la semilla.
+// Jamás tocan lo que el dueño haya cambiado en /tienda. Idempotentes.
+const IMAGE_FIXES = {
+  "combo-1": ["cross-gris.jpg", "cuerito-entero.jpg"],
+  "combo-2": ["bandeja-1.jpg", "tray-real-1.jpg"],
+  "combo-4": ["cross-cordonbleu.jpg", "tray-real-2.jpg"],
+  "combo-5": ["cross-amarillo.jpg", "bandeja-1.jpg"]
+};
+function applyImageFixes(catalog) {
+  let fixed = 0;
+  for (const d of (catalog && catalog.departments) || []) {
+    for (const c of d.categories || []) {
+      for (const it of c.items || []) {
+        const f = IMAGE_FIXES[it.id];
+        if (!f) continue;
+        for (const key of ["image", "img"]) {
+          if (it[key] === f[0]) { it[key] = f[1]; fixed++; }
+        }
+      }
+    }
+  }
+  return fixed;
+}
+
 async function init() {
   if (process.env.DATABASE_URL) {
     const { Pool } = require("pg");
@@ -130,9 +155,10 @@ async function init() {
       let live = null;
       try { live = JSON.parse(await kvGet("catalog")); } catch { live = null; }
       const m = mergeCatalog(live, SEED_CATALOG);
+      const fx = applyImageFixes(m.catalog);
       await kvSet("catalog", JSON.stringify(m.catalog));
       await kvSet("catalog_version", String(CATALOG_VERSION));
-      console.log(`[don-ramon] Catálogo fusionado (v${v} → v${CATALOG_VERSION}): +${m.added} nuevos, ${m.filled} campos rellenados. Lo del dueño intacto.`);
+      console.log(`[don-ramon] Catálogo fusionado (v${v} → v${CATALOG_VERSION}): +${m.added} nuevos, ${m.filled} campos rellenados, ${fx} fotos corregidas. Lo del dueño intacto.`);
     }
   }
   if (!(await kvGet("order_seq"))) await kvSet("order_seq", "0");
