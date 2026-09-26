@@ -105,12 +105,14 @@ function mergeCatalog(live, seed) {
 const IMAGE_FIXES = {
   "combo-1": [["cross-gris.jpg", "cuerito-entero.jpg"]],
   "combo-2": [["bandeja-1.jpg", "tray-real-1.jpg"], ["tray-real-1.jpg", "pernil-flyer.jpg"], ["pernil-flyer.jpg", "pernil-real.jpg"]],
-  "combo-3": [["bandeja-2.jpg", "pollo-asado.jpg"]],
+  "combo-3": [["bandeja-2.jpg", "pollo-asado.jpg"], ["pollo-asado.jpg", "pollo-piezas.jpg"]],
   "combo-4": [["cross-cordonbleu.jpg", "tray-real-2.jpg"]],
   "combo-5": [["cross-amarillo.jpg", "bandeja-1.jpg"]],
-  "cuerito-congri": [["cross-gris.jpg", "relleno-largo-1.jpg"], ["relleno-largo-1.jpg", "relleno-congri.jpg"]],
-  "cuerito-amarillo": [["cross-amarillo.jpg", "relleno-largo-2.jpg"], ["relleno-largo-2.jpg", "relleno-amarillo.jpg"]],
-  "cuerito-jamon-queso": [["cross-cordonbleu.jpg", "relleno-largo-3.jpg"], ["relleno-largo-3.jpg", "relleno-cordon.jpg"]]
+  "cuerito-congri": [["cross-gris.jpg", "relleno-largo-1.jpg"], ["relleno-largo-1.jpg", "relleno-congri.jpg"], ["relleno-congri.jpg", "cuerito-moro.jpg"]],
+  "cuerito-amarillo": [["cross-amarillo.jpg", "relleno-largo-2.jpg"], ["relleno-largo-2.jpg", "relleno-amarillo.jpg"], ["relleno-amarillo.jpg", "cuerito-amarillo.jpg"]],
+  "cuerito-jamon-queso": [["cross-cordonbleu.jpg", "relleno-largo-3.jpg"], ["relleno-largo-3.jpg", "relleno-cordon.jpg"], ["relleno-cordon.jpg", "cuerito-jamon-queso.jpg"]],
+  "bandeja-yuca": [["bandeja-yuca-mojo.jpg", "bandejita-yuca.jpg"]],
+  "bandeja-congri": [["bandeja-congri.jpg", "bandejita-arroz-moro.jpg"]]
 };
 function applyImageFixes(catalog) {
   let fixed = 0, changed = true, pass = 0;
@@ -125,6 +127,92 @@ function applyImageFixes(catalog) {
             for (const [oldV, newV] of steps) {
               if (it[key] === oldV) { it[key] = newV; fixed++; changed = true; }
             }
+          }
+        }
+      }
+    }
+  }
+  return fixed;
+}
+
+// ---------- Correcciones puntuales del menú real (v4 → v5) ----------
+// El 26-sep-2026 Don Ramón confirmó su menú real vía WhatsApp (flyers
+// oficiales): los precios "sugeridos" pasan a ser los precios reales
+// del flyer, y los departamentos toman los nombres del flyer.
+// mergeCatalog() jamás toca name/price/unit/tag/desc de ítems que ya
+// existen, por eso estas correcciones van aquí, con la misma regla de
+// IMAGE_FIXES: solo se aplican si el valor actual es EXACTAMENTE el
+// viejo de la semilla. Jamás tocan lo que el dueño haya cambiado en
+// /tienda. Idempotentes.
+const DEPT_FIXES = {
+  "combos": [["Combos para 10 Personas", "Combos para 10 personas"]],
+  "cueritos": [["Cueritos Rellenos", "Solos"]],
+  "bandejas": [["Bandejas", "Bandejitas"]]
+};
+const VALUE_FIXES = {
+  "combo-1": {
+    "desc": [["Cuerito relleno de arroz moro, bandejita de arroz moro, yuca con mojo.", "1 cuerito relleno de arroz moro + 1 bandejita de arroz moro + 1 bandejita de yuca con mojo."]]
+  },
+  "combo-2": {
+    "desc": [["Paleta de puerco, arroz moro, yuca con mojo.", "1 paleta de puerco + 1 bandejita de arroz moro + 1 bandejita de yuca con mojo."]]
+  },
+  "combo-3": {
+    "desc": [["Muslo y contramuslo, arroz moro, plátano maduro.", "10 piezas de pollo (muslo con contramuslo) + 1 bandejita de arroz moro + 1 bandejita de plátano maduro."]]
+  },
+  "combo-4": {
+    "desc": [["Cuerito relleno de jamón y queso, arroz moro, yuca con mojo.", "1 cuerito de jamón y queso + 1 bandejita de arroz moro + 1 bandejita de yuca con mojo."]]
+  },
+  "combo-5": {
+    "desc": [["Cuerito relleno de arroz amarillo, arroz amarillo, plátano maduro.", "1 cuerito de arroz amarillo + 1 bandejita de arroz amarillo + 1 bandejita de plátano maduro."]]
+  },
+  "cuerito-congri": {
+    "name": [["Cuerito Relleno de Congrí", "Cuerito Relleno de Arroz Moro"]],
+    "price": [[100, 120]],
+    "unit": [["entero", "solo"]],
+    "tag": [["⭐ El rey de la casa", null]],
+    "desc": [["Cuerito entero relleno de arroz congrí. Cuero crujiente, relleno generoso. Precio sugerido — confirmar con Don Ramón.", "Cuerito entero relleno de arroz moro. Cuero crujiente, relleno generoso."]]
+  },
+  "cuerito-amarillo": {
+    "price": [[100, 140]],
+    "unit": [["entero", "solo"]],
+    "tag": [["Sugerido", null]],
+    "desc": [["Cuerito entero relleno de arroz amarillo con petit pois. Precio sugerido — confirmar con Don Ramón.", "Cuerito entero relleno de arroz amarillo. Cuero crujiente, relleno generoso."]]
+  },
+  "cuerito-jamon-queso": {
+    "price": [[120, 140]],
+    "unit": [["entero", "solo"]],
+    "tag": [["NUEVO", null]],
+    "desc": [["Cuerito entero relleno de jamón y queso estilo cordon bleu. Precio sugerido — confirmar con Don Ramón.", "Cuerito entero relleno de jamón y queso. Cuero crujiente, relleno generoso."]]
+  },
+  "bandeja-yuca": {
+    "name": [["Bandeja de Yuca con Mojo", "Bandejita de Yuca con Mojo"]],
+    "price": [[35, 20]],
+    "unit": [["bandeja", "bandejita"]],
+    "tag": [["Sugerido", null]],
+    "desc": [["Yuca hervida con mojo criollo y cebollita blanca. Precio sugerido — confirmar con Don Ramón.", "Yuca hervida con mojo criollo y cebollita."]]
+  },
+  "bandeja-congri": {
+    "name": [["Bandeja de Congrí", "Bandejita de Arroz Moro"]],
+    "price": [[30, 20]],
+    "unit": [["bandeja", "bandejita"]],
+    "tag": [["Sugerido", null]],
+    "desc": [["Arroz congrí casero, como en casa. Precio sugerido — confirmar con Don Ramón.", "Arroz moro casero, como en casa."]]
+  }
+};
+function applyValueFixes(catalog) {
+  let fixed = 0;
+  const same = (a, b) => JSON.stringify(a === undefined ? null : a) === JSON.stringify(b);
+  for (const d of (catalog && catalog.departments) || []) {
+    for (const [oldN, newN] of (DEPT_FIXES[d.id] || [])) {
+      if (d.name === oldN) { d.name = newN; fixed++; }
+    }
+    for (const c of d.categories || []) {
+      for (const it of c.items || []) {
+        const fx = VALUE_FIXES[it.id];
+        if (!fx) continue;
+        for (const [field, steps] of Object.entries(fx)) {
+          for (const [oldV, newV] of steps) {
+            if (same(it[field], oldV)) { it[field] = newV; fixed++; }
           }
         }
       }
@@ -166,9 +254,10 @@ async function init() {
       try { live = JSON.parse(await kvGet("catalog")); } catch { live = null; }
       const m = mergeCatalog(live, SEED_CATALOG);
       const fx = applyImageFixes(m.catalog);
+      const vx = applyValueFixes(m.catalog);
       await kvSet("catalog", JSON.stringify(m.catalog));
       await kvSet("catalog_version", String(CATALOG_VERSION));
-      console.log(`[don-ramon] Catálogo fusionado (v${v} → v${CATALOG_VERSION}): +${m.added} nuevos, ${m.filled} campos rellenados, ${fx} fotos corregidas. Lo del dueño intacto.`);
+      console.log(`[don-ramon] Catálogo fusionado (v${v} → v${CATALOG_VERSION}): +${m.added} nuevos, ${m.filled} campos rellenados, ${fx} fotos corregidas, ${vx} valores del menú real aplicados. Lo del dueño intacto.`);
     }
   }
   if (!(await kvGet("order_seq"))) await kvSet("order_seq", "0");

@@ -1,22 +1,19 @@
 // ============================================================
 // CATÁLOGO SEMILLA — Don Ramón · El Rey de los Cueritos Rellenos
 // Catering cubano en Miami (9351 SW 56 St, Miami FL 33165).
-// Menú extraído del flyer oficial de @elreydeloscueritosrellenos.
-// Combos para 10 personas. Precios en US$ confirmados en el flyer.
-// Cueritos enteros y bandejas: precios SUGERIDOS — confirmar con Don Ramón.
-// Fotos: reales del dueño + cortesía de Portal (cross-sections).
-// Si llegan fotos originales más limpias, se reemplazan los
-// archivos en public/images/ con el mismo nombre.
+// Menú REAL confirmado por Don Ramón vía WhatsApp (26-sep-2026):
+// flyers oficiales con combos, solos, bandejitas y precios finales.
+// Precios en US$. Fotos: recortes directos de sus flyers.
 // CATALOG_VERSION: subir para re-sembrar en el servidor.
 // ============================================================
 
-const CATALOG_VERSION = 4;
+const CATALOG_VERSION = 5;
 
 const SEED_CATALOG = {
   departments: [
     {
       id: "combos",
-      name: "Combos para 10 Personas",
+      name: "Combos para 10 personas",
       icon: "👑",
       iconImg: "combo-cuerito.jpg",
       categories: [
@@ -25,22 +22,22 @@ const SEED_CATALOG = {
           name: "Para 10 personas",
           items: [
             { id: "combo-1", name: "Combo 1 · Cuerito Relleno de Arroz Moro", price: 160.00, unit: "10 personas", active: true, tag: "⭐ El rey de la casa", image: "cuerito-entero.jpg",
-              desc: "Cuerito relleno de arroz moro, bandejita de arroz moro, yuca con mojo." },
+              desc: "1 cuerito relleno de arroz moro + 1 bandejita de arroz moro + 1 bandejita de yuca con mojo." },
             { id: "combo-2", name: "Combo 2 · Paleta de Puerco", price: 100.00, unit: "10 personas", active: true, image: "pernil-real.jpg",
-              desc: "Paleta de puerco, arroz moro, yuca con mojo." },
-            { id: "combo-3", name: "Combo 3 · Piezas de Pollo", price: 100.00, unit: "10 personas", active: true, image: "pollo-asado.jpg",
-              desc: "Muslo y contramuslo, arroz moro, plátano maduro." },
+              desc: "1 paleta de puerco + 1 bandejita de arroz moro + 1 bandejita de yuca con mojo." },
+            { id: "combo-3", name: "Combo 3 · Piezas de Pollo", price: 100.00, unit: "10 personas", active: true, image: "pollo-piezas.jpg",
+              desc: "10 piezas de pollo (muslo con contramuslo) + 1 bandejita de arroz moro + 1 bandejita de plátano maduro." },
             { id: "combo-4", name: "Combo 4 · Cuerito de Jamón y Queso", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "tray-real-2.jpg",
-              desc: "Cuerito relleno de jamón y queso, arroz moro, yuca con mojo." },
+              desc: "1 cuerito de jamón y queso + 1 bandejita de arroz moro + 1 bandejita de yuca con mojo." },
             { id: "combo-5", name: "Combo 5 · Cuerito de Arroz Amarillo", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "bandeja-1.jpg",
-              desc: "Cuerito relleno de arroz amarillo, arroz amarillo, plátano maduro." }
+              desc: "1 cuerito de arroz amarillo + 1 bandejita de arroz amarillo + 1 bandejita de plátano maduro." }
           ]
         }
       ]
     },
     {
       id: "cueritos",
-      name: "Cueritos Rellenos",
+      name: "Solos",
       icon: "🔥",
       iconImg: "logo.jpg",
       categories: [
@@ -48,29 +45,35 @@ const SEED_CATALOG = {
           id: "cueritos-enteros",
           name: "Enteros",
           items: [
-            { id: "cuerito-congri", name: "Cuerito Relleno de Congrí", price: 100.00, unit: "entero", active: true, tag: "⭐ El rey de la casa", image: "relleno-congri.jpg",
-              desc: "Cuerito entero relleno de arroz congrí. Cuero crujiente, relleno generoso. Precio sugerido — confirmar con Don Ramón." },
-            { id: "cuerito-amarillo", name: "Cuerito Relleno de Arroz Amarillo", price: 100.00, unit: "entero", active: true, tag: "Sugerido", image: "relleno-amarillo.jpg",
-              desc: "Cuerito entero relleno de arroz amarillo con petit pois. Precio sugerido — confirmar con Don Ramón." },
-            { id: "cuerito-jamon-queso", name: "Cuerito Relleno de Jamón y Queso", price: 120.00, unit: "entero", active: true, tag: "NUEVO", image: "relleno-cordon.jpg",
-              desc: "Cuerito entero relleno de jamón y queso estilo cordon bleu. Precio sugerido — confirmar con Don Ramón." }
+            { id: "cuerito-congri", name: "Cuerito Relleno de Arroz Moro", price: 120.00, unit: "solo", active: true, image: "cuerito-moro.jpg",
+              desc: "Cuerito entero relleno de arroz moro. Cuero crujiente, relleno generoso." },
+            { id: "cuerito-amarillo", name: "Cuerito Relleno de Arroz Amarillo", price: 140.00, unit: "solo", active: true, image: "cuerito-amarillo.jpg",
+              desc: "Cuerito entero relleno de arroz amarillo. Cuero crujiente, relleno generoso." },
+            { id: "cuerito-jamon-queso", name: "Cuerito Relleno de Jamón y Queso", price: 140.00, unit: "solo", active: true, image: "cuerito-jamon-queso.jpg",
+              desc: "Cuerito entero relleno de jamón y queso. Cuero crujiente, relleno generoso." },
+            { id: "paleta-sola", name: "Paleta Sola", price: 60.00, unit: "sola", active: true, image: "paleta-sola.jpg",
+              desc: "Paleta de puerco asada entera, cuero crujiente." }
           ]
         }
       ]
     },
     {
       id: "bandejas",
-      name: "Bandejas",
+      name: "Bandejitas",
       icon: "🍽️",
       categories: [
         {
           id: "bandejas-caseras",
           name: "Para acompañar",
           items: [
-            { id: "bandeja-yuca", name: "Bandeja de Yuca con Mojo", price: 35.00, unit: "bandeja", active: true, tag: "Sugerido", image: "bandeja-yuca-mojo.jpg",
-              desc: "Yuca hervida con mojo criollo y cebollita blanca. Precio sugerido — confirmar con Don Ramón." },
-            { id: "bandeja-congri", name: "Bandeja de Congrí", price: 30.00, unit: "bandeja", active: true, tag: "Sugerido", image: "bandeja-congri.jpg",
-              desc: "Arroz congrí casero, como en casa. Precio sugerido — confirmar con Don Ramón." }
+            { id: "bandeja-yuca", name: "Bandejita de Yuca con Mojo", price: 20.00, unit: "bandejita", active: true, image: "bandejita-yuca.jpg",
+              desc: "Yuca hervida con mojo criollo y cebollita." },
+            { id: "bandeja-congri", name: "Bandejita de Arroz Moro", price: 20.00, unit: "bandejita", active: true, image: "bandejita-arroz-moro.jpg",
+              desc: "Arroz moro casero, como en casa." },
+            { id: "bandeja-amarillo", name: "Bandejita de Arroz Amarillo", price: 20.00, unit: "bandejita", active: true, image: "bandejita-arroz-amarillo.jpg",
+              desc: "Arroz amarillo casero con petit pois." },
+            { id: "bandeja-maduro", name: "Bandejita de Plátano Maduro", price: 20.00, unit: "bandejita", active: true, image: "bandejita-maduro.jpg",
+              desc: "Plátano maduro frito, dulce y dorado." }
           ]
         }
       ]
