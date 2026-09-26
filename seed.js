@@ -7,7 +7,7 @@
 // CATALOG_VERSION: subir para re-sembrar en el servidor.
 // ============================================================
 
-const CATALOG_VERSION = 5;
+const CATALOG_VERSION = 6;
 
 const SEED_CATALOG = {
   departments: [
@@ -21,15 +21,15 @@ const SEED_CATALOG = {
           id: "combos-10p",
           name: "Para 10 personas",
           items: [
-            { id: "combo-1", name: "Combo 1 · Cuerito Relleno de Arroz Moro", price: 160.00, unit: "10 personas", active: true, tag: "⭐ El rey de la casa", image: "cuerito-entero.jpg",
+            { id: "combo-1", name: "Combo 1 · Cuerito Relleno de Arroz Moro", price: 160.00, unit: "10 personas", active: true, tag: "⭐ El rey de la casa", image: "combo1-hero.jpg",
               desc: "1 cuerito relleno de arroz moro + 1 bandejita de arroz moro + 1 bandejita de yuca con mojo." },
             { id: "combo-2", name: "Combo 2 · Paleta de Puerco", price: 100.00, unit: "10 personas", active: true, image: "pernil-real.jpg",
               desc: "1 paleta de puerco + 1 bandejita de arroz moro + 1 bandejita de yuca con mojo." },
             { id: "combo-3", name: "Combo 3 · Piezas de Pollo", price: 100.00, unit: "10 personas", active: true, image: "pollo-piezas.jpg",
               desc: "10 piezas de pollo (muslo con contramuslo) + 1 bandejita de arroz moro + 1 bandejita de plátano maduro." },
-            { id: "combo-4", name: "Combo 4 · Cuerito de Jamón y Queso", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "tray-real-2.jpg",
+            { id: "combo-4", name: "Combo 4 · Cuerito de Jamón y Queso", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "combo4-hero.jpg",
               desc: "1 cuerito de jamón y queso + 1 bandejita de arroz moro + 1 bandejita de yuca con mojo." },
-            { id: "combo-5", name: "Combo 5 · Cuerito de Arroz Amarillo", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "bandeja-1.jpg",
+            { id: "combo-5", name: "Combo 5 · Cuerito de Arroz Amarillo", price: 180.00, unit: "10 personas", active: true, tag: "NUEVO", image: "combo5-hero.jpg",
               desc: "1 cuerito de arroz amarillo + 1 bandejita de arroz amarillo + 1 bandejita de plátano maduro." }
           ]
         }
@@ -45,11 +45,11 @@ const SEED_CATALOG = {
           id: "cueritos-enteros",
           name: "Enteros",
           items: [
-            { id: "cuerito-congri", name: "Cuerito Relleno de Arroz Moro", price: 120.00, unit: "solo", active: true, image: "cuerito-moro.jpg",
+            { id: "cuerito-congri", name: "Cuerito Relleno de Arroz Moro", price: 120.00, unit: "solo", active: true, image: "cuerito-moro-close.jpg",
               desc: "Cuerito entero relleno de arroz moro. Cuero crujiente, relleno generoso." },
-            { id: "cuerito-amarillo", name: "Cuerito Relleno de Arroz Amarillo", price: 140.00, unit: "solo", active: true, image: "cuerito-amarillo.jpg",
+            { id: "cuerito-amarillo", name: "Cuerito Relleno de Arroz Amarillo", price: 140.00, unit: "solo", active: true, image: "cuerito-amarillo-close.jpg",
               desc: "Cuerito entero relleno de arroz amarillo. Cuero crujiente, relleno generoso." },
-            { id: "cuerito-jamon-queso", name: "Cuerito Relleno de Jamón y Queso", price: 140.00, unit: "solo", active: true, image: "cuerito-jamon-queso.jpg",
+            { id: "cuerito-jamon-queso", name: "Cuerito Relleno de Jamón y Queso", price: 140.00, unit: "solo", active: true, image: "cuerito-jamonqueso-close.jpg",
               desc: "Cuerito entero relleno de jamón y queso. Cuero crujiente, relleno generoso." },
             { id: "paleta-sola", name: "Paleta Sola", price: 60.00, unit: "sola", active: true, image: "paleta-sola.jpg",
               desc: "Paleta de puerco asada entera, cuero crujiente." }

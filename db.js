@@ -98,19 +98,23 @@ function mergeCatalog(live, seed) {
   return { catalog: base, added, filled };
 }
 
-// ---------- Correcciones puntuales de fotos (v1 → v2 → v3 → v4) ----------
+// ---------- Correcciones puntuales de fotos (v1 → v2 → v3 → v4 → v5 → v6) ----------
 // Solo se aplican si el valor actual es EXACTAMENTE el viejo de la semilla.
 // Jamás tocan lo que el dueño haya cambiado en /tienda. Idempotentes.
 // Cada item puede tener una cadena de pasos; se aplican en orden hasta estabilizar.
+// v6 (26-sep-2026): Portal mandó 3 fotos detalle nuevas de los combos y pidió que
+// cada producto muestre su foto correcta — los combos 1/4/5 dejan el genérico
+// combo-cuerito.jpg por sus héroes, y los 3 cueritos solos reciben close-ups
+// limpios sin texto del flyer (autorizado explícitamente por Portal).
 const IMAGE_FIXES = {
-  "combo-1": [["cross-gris.jpg", "cuerito-entero.jpg"]],
+  "combo-1": [["cross-gris.jpg", "cuerito-entero.jpg"], ["combo-cuerito.jpg", "combo1-hero.jpg"]],
   "combo-2": [["bandeja-1.jpg", "tray-real-1.jpg"], ["tray-real-1.jpg", "pernil-flyer.jpg"], ["pernil-flyer.jpg", "pernil-real.jpg"]],
   "combo-3": [["bandeja-2.jpg", "pollo-asado.jpg"], ["pollo-asado.jpg", "pollo-piezas.jpg"]],
-  "combo-4": [["cross-cordonbleu.jpg", "tray-real-2.jpg"]],
-  "combo-5": [["cross-amarillo.jpg", "bandeja-1.jpg"]],
-  "cuerito-congri": [["cross-gris.jpg", "relleno-largo-1.jpg"], ["relleno-largo-1.jpg", "relleno-congri.jpg"], ["relleno-congri.jpg", "cuerito-moro.jpg"]],
-  "cuerito-amarillo": [["cross-amarillo.jpg", "relleno-largo-2.jpg"], ["relleno-largo-2.jpg", "relleno-amarillo.jpg"], ["relleno-amarillo.jpg", "cuerito-amarillo.jpg"]],
-  "cuerito-jamon-queso": [["cross-cordonbleu.jpg", "relleno-largo-3.jpg"], ["relleno-largo-3.jpg", "relleno-cordon.jpg"], ["relleno-cordon.jpg", "cuerito-jamon-queso.jpg"]],
+  "combo-4": [["cross-cordonbleu.jpg", "tray-real-2.jpg"], ["combo-cuerito.jpg", "combo4-hero.jpg"]],
+  "combo-5": [["cross-amarillo.jpg", "bandeja-1.jpg"], ["combo-cuerito.jpg", "combo5-hero.jpg"]],
+  "cuerito-congri": [["cross-gris.jpg", "relleno-largo-1.jpg"], ["relleno-largo-1.jpg", "relleno-congri.jpg"], ["relleno-congri.jpg", "cuerito-moro.jpg"], ["cuerito-moro.jpg", "cuerito-moro-close.jpg"]],
+  "cuerito-amarillo": [["cross-amarillo.jpg", "relleno-largo-2.jpg"], ["relleno-largo-2.jpg", "relleno-amarillo.jpg"], ["relleno-amarillo.jpg", "cuerito-amarillo.jpg"], ["cuerito-amarillo.jpg", "cuerito-amarillo-close.jpg"]],
+  "cuerito-jamon-queso": [["cross-cordonbleu.jpg", "relleno-largo-3.jpg"], ["relleno-largo-3.jpg", "relleno-cordon.jpg"], ["relleno-cordon.jpg", "cuerito-jamon-queso.jpg"], ["cuerito-jamon-queso.jpg", "cuerito-jamonqueso-close.jpg"]],
   "bandeja-yuca": [["bandeja-yuca-mojo.jpg", "bandejita-yuca.jpg"]],
   "bandeja-congri": [["bandeja-congri.jpg", "bandejita-arroz-moro.jpg"]]
 };
